@@ -1,6 +1,5 @@
 .home-container{
     width: 100%;
-    font-family: 'Roboto', sans-serif;
     margin: 2% auto;
 }
 .home-grid{
@@ -18,37 +17,26 @@ a{
     width: 70%;
     height: 100%;
     position: relative;
-    box-shadow: 0 2px 7px #dfdfdf;
-    background: #fafafa;
+    box-shadow: 0 2px 7px #d2caca;
+    background: #ffffff;
 }
 
-.badge {
-    position: absolute;
-    left: 0;
-    top: 20px;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 700;
-    background: red;
-    color: #fff;
-    padding: 3px 10px;
-}
 
 .product-tumb {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 50px;
-    background: #f0f0f0;
+    background: #ffffff;
 }
 
 .product-tumb img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 }
 
 .product-details {
-    padding: 5% 10%;
+    padding: 5% 5%;
 }
 
 .product-catagory {
@@ -60,7 +48,8 @@ a{
     margin-bottom: 10px;
 }
 
-.product-details h4 a {
+.product-details h4 {
+    font-size: 15px;
     font-weight: 500;
     display: block;
     margin-bottom: 10px;
@@ -68,29 +57,33 @@ a{
     color: #121212;
     text-decoration: none;
     transition: 0.3s;
+    line-height: 1.5em;
+    height: 3em;     
+    overflow: hidden;
+    cursor: pointer;
 }
 
-.product-details h4 a:hover {
-    color: #617af7;
-}
+
 
 .product-details p {
     font-size: 14px;
     line-height: 20px;
-    color: rgb(122, 122, 122);
+    color: rgb(122, 122, 122);  
 }
 
 .product-bottom-details {
-    overflow: hidden;
     padding-top: 10px;
+    
 }
 
-.product-bottom-details div {
+/* .product-bottom-details div {
     float: left;
     width: 50%;
-}
+} */
 
 .product-price {
+    position: absolute;
+    bottom: 10px;
     font-size: 18px;
     color: #ff0000;
     font-weight: 600;
