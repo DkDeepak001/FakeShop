@@ -5,7 +5,8 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Products from './components/products/Products';
 import Cart from './components/cart/Cart';
-
+import Login from './components/login/login';
+import signUp from './components/login/signUp';
 function App() {
   return (
     <div className="App-container">
@@ -17,6 +18,10 @@ function App() {
               <Route exact path="/products/:productId" component={Products}>
               </Route>
               <Route exact path="/cart" component={Cart} >
+              </Route>
+              <Route exact path="/login" component={Login} >
+              </Route>
+              <Route exact path="/signup" component={signUp} >
               </Route>
             </Switch>
       </Router>

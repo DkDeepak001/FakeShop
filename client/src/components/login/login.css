@@ -1,0 +1,120 @@
+.login-container{
+    background-color: rgb(228, 229, 247);
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+
+}
+  .social-login img {
+    width: 24px;
+  }
+  .card {
+    font-family: sans-serif;
+    width: 25%;
+    height: 85%;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #ffff;
+    padding: 1.8rem;
+    box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .signup-card {
+    font-family: sans-serif;
+    width: 25%;
+    height: 95%;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #ffff;
+    padding: 1.8rem;
+    box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  
+  .title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    
+}
+.subtitle {
+    text-align: center;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+  .btn-text {
+    margin: 0;
+  }
+  
+  .social-login {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .google-btn {
+    background: #fff;
+    border: solid 2px rgb(245 239 239);
+    border-radius: 8px;
+    font-weight: bold;
+    display: flex;
+    padding: 10px 10px;
+    flex: auto;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+  }
+
+  
+  .or {
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid rgb(245 239 239);
+    line-height: 0.1em;
+    margin: 20px 0;
+  }
+  .or span {
+    background: #fff;
+    padding: 0 10px;
+  }
+  
+  .email-login {
+    display: flex;
+    flex-direction: column;
+  }
+  .email-login label {
+    font-size: 14px;
+    color: rgb(121, 121, 121);
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    padding: 15px 20px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  
+  .cta-btn {
+    background-color: rgb(69, 69, 185);
+    color: white;
+    padding: 18px 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .forget-pass {
+    text-align: center;
+    display: block;
+  }
+  
