@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import './login.css';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
-    const [formDetails,setFormDetails] = useState({
-        password:"",
-        email:"",
-    });
+    const [formDetails,setFormDetails] = useState({ });
 
     const updateHandler = (e)=>{
         const name  = e.target.name;
@@ -20,9 +18,21 @@ function Login() {
        
       
     }
-
+    const formData = async(data) =>{
+        const bodyData = data;
+        console.log(bodyData);
+        const response = await axios.post("http://localhost:5000/login",{
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: bodyData
+        });
+        console.log(response);
+    }
     const submitForm = (e) => {
         e.preventDefault();
+        formData(formDetails);
         console.log(formDetails)
     }
   return (
@@ -42,9 +52,9 @@ function Login() {
       <p className="or"><span>or</span></p>
 
       <div className="email-login">
-         <label for="email"> <b>Email</b></label>
-         <input type="text" placeholder="Enter Email" name="email" required onChange={updateHandler}/>
-         <label for="psw"><b>Password</b></label>
+         <label> <b>Username</b></label>
+         <input type="text" placeholder="Enter Username" name="userName" required onChange={updateHandler}/>
+         <label><b>Password</b></label>
          <input type="password" placeholder="Enter Password" name="password" required onChange={updateHandler} />
       </div>
       <button className="cta-btn" onClick={submitForm}>Log In</button>
