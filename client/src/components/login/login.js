@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import './login.css';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 function Login() {
-    const [formDetails,setFormDetails] = useState({ });
+    const [formDetails,setFormDetails] = useState({ 
+        userName:"",
+        password:"",
+    });
 
     const updateHandler = (e)=>{
         const name  = e.target.name;
@@ -20,20 +24,28 @@ function Login() {
     }
     const formData = async(data) =>{
         const bodyData = data;
-        console.log(bodyData);
-        const response = await axios.post("http://localhost:5000/login",{
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8'
-            },
-            data: bodyData
-        });
-        console.log(response);
+        if(data.userName === '' &&  data.password === '' ){
+            const response = await axios.post("http://localhost:5000/login",{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data: bodyData
+            });
+        }else{
+            swal("please fill all details");
+        }
+
+            
     }
+
     const submitForm = (e) => {
         e.preventDefault();
         formData(formDetails);
-        console.log(formDetails)
+        setFormDetails({
+            userName:"",
+            password:"",
+        });
     }
   return (
     <div className='login-container'>
@@ -53,9 +65,9 @@ function Login() {
 
       <div className="email-login">
          <label> <b>Username</b></label>
-         <input type="text" placeholder="Enter Username" name="userName" required onChange={updateHandler}/>
+         <input type="text" placeholder="Enter Username" name="userName" value={formDetails.userName} required onChange={updateHandler}/>
          <label><b>Password</b></label>
-         <input type="password" placeholder="Enter Password" name="password" required onChange={updateHandler} />
+         <input type="password" placeholder="Enter Password" name="password" value={formDetails.password} required onChange={updateHandler} />
       </div>
       <button className="cta-btn" onClick={submitForm}>Log In</button>
    </form>

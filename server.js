@@ -25,7 +25,7 @@ app.route("/login")
     })
     .post(async(req,res) => {
         console.log("login POST reoute");
-        res.status(200).json(await AuthDB.login(req.body.data))
+        console.log(await AuthDB.login(req.body.data));
     })
     
     app.route("/signUp")
@@ -34,7 +34,14 @@ app.route("/login")
     })
     .post(async(req,res) => {
         console.log("signUp POST route");
-        res.status(200).json(await AuthDB.signUp(req.body.data))
+        const response = (await AuthDB.signUp(req.body.data))
+        if(response.error){
+            res.status(200).json({error : response.error});
+        }else{
+            res.status(200).json({sucess : response})
+        }
+        console.log(response);
+    //    (await AuthDB.signUp(req.body.data));
     })
 
 
