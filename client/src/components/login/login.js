@@ -24,7 +24,7 @@ function Login() {
     }
     const formData = async(data) =>{
         const bodyData = data;
-        if(data.userName === '' &&  data.password === '' ){
+        if(data.userName !== '' &&  data.password !== '' ){
             const response = await axios.post("http://localhost:5000/login",{
                 headers: {
                     'Accept': 'application/json',
@@ -32,6 +32,14 @@ function Login() {
                 },
                 data: bodyData
             });
+            if(!response.data.error){
+                if(response.data.token){
+                   localStorage.setItem("token",response.data.token);
+                }
+            }else{
+                swal(response.data.error);
+            }
+            
         }else{
             swal("please fill all details");
         }
@@ -42,10 +50,7 @@ function Login() {
     const submitForm = (e) => {
         e.preventDefault();
         formData(formDetails);
-        setFormDetails({
-            userName:"",
-            password:"",
-        });
+       
     }
   return (
     <div className='login-container'>

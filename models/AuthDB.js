@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const jwt = require('jsonwebtoken');
+
 
 mongoose.connect('mongodb://localhost:27017/fakeShop')
     .then(()=>{
@@ -20,7 +24,31 @@ const newUserSchema = new mongoose.Schema({
 const newUser = new mongoose.model("User",newUserSchema)
 
 exports.login = async (data) =>{
-    console.log(data);
+    try {
+        const {userName  ,password } = await data;
+        const ts = (Math.floor(Date.now() / 1000));
+       
+        const findUser = await newUser.findOne({userName: userName});
+        if(findUser){
+            const checkPassword = await bcrypt.compare(password, findUser.password)
+            if(checkPassword) {
+                const secretPhrase = "kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a" + findUser.password ;
+                const token = jwt.sign({userName : findUser.userName},secretPhrase)
+                if(token){
+                    return {sucess :"user Authenticated" ,token : token};
+                }else{
+                    return {error : "Something went wrong"}
+                }
+            }else{
+                return {error : "Invalid password"};
+            }
+        }else {
+            return {error :"Invalid username"} ;
+        }
+    }
+     catch (error) {
+        return {error : error}
+    }
 }
 
 exports.signUp = async (data) =>{
@@ -29,10 +57,11 @@ exports.signUp = async (data) =>{
         const ts = (Math.floor(Date.now() / 1000));
        
         const findUser = await newUser.findOne({userName: userName});
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
         if(findUser === null){
             const addNewUser = new newUser({
                 userName : userName,
-                password : password,
+                password : hashedPassword,
                 email :email,
                 timsStamp: ts
             })
@@ -42,6 +71,7 @@ exports.signUp = async (data) =>{
         }else {
             return {error :"Username already exist"} ;
         }
+        
     }
      catch (error) {
         return {error : error}

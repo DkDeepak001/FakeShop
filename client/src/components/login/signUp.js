@@ -37,6 +37,11 @@ function Login() {
                 data: bodyData
             });
             if(response.data.sucess){
+                setFormDetails({
+                    userName:"",
+                    password:"",
+                    email:""
+                });
                 window.location.href = "/login" ;
 
             }else{
@@ -55,11 +60,7 @@ function Login() {
     const submitForm = (e) => {
         e.preventDefault();
         formData(formDetails);
-        setFormDetails({
-            userName:"",
-            password:"",
-            email:""
-        });
+       
     }
   return (
     <div className='login-container'>
