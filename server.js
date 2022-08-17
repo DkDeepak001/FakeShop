@@ -48,6 +48,13 @@ app.route("/login")
         }
     })
 
+app.route("/validateToken")
+    .post(async(req,res) => {
+        const response = await AuthDB.validateToken(req.body.data)
+        if(response.userName !== null ){
+            res.status(200).json({tokenValidated : true , userName : response.userName});
+        }
+    })
 
 app.listen("5000",() => {
     console.log("server started at port 5000");

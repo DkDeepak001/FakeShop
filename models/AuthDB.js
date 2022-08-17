@@ -32,7 +32,7 @@ exports.login = async (data) =>{
         if(findUser){
             const checkPassword = await bcrypt.compare(password, findUser.password)
             if(checkPassword) {
-                const secretPhrase = "kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a" + findUser.password ;
+                const secretPhrase = "kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a";
                 const token = jwt.sign({userName : findUser.userName},secretPhrase)
                 if(token){
                     return {sucess :"user Authenticated" ,token : token};
@@ -77,4 +77,15 @@ exports.signUp = async (data) =>{
         return {error : error}
     }
 
+}
+
+
+exports.validateToken = async (data) => {
+    if(data){
+        const verifyToken = await jwt.verify(data,"kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a");
+        return (verifyToken);
+    }else {
+        return {userName : null}
+    }
+    
 }

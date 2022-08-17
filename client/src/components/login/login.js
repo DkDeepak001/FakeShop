@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './login.css';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 
 function Login() {
+
+    const [token ,setToken] = useState("");
     const [formDetails,setFormDetails] = useState({ 
         userName:"",
         password:"",
@@ -22,6 +24,25 @@ function Login() {
        
       
     }
+
+    useEffect(()=> {
+        validateToken(token);
+    },[token])
+
+    const validateToken = async ( rawToken ) => { 
+        const response  = await axios.post("http://localhost:5000/validateToken",{
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: rawToken
+        });
+        if(response.data.tokenValidated){
+            window.location.href = "/"
+        }
+    }
+
+
     const formData = async(data) =>{
         const bodyData = data;
         if(data.userName !== '' &&  data.password !== '' ){
@@ -35,6 +56,8 @@ function Login() {
             if(!response.data.error){
                 if(response.data.token){
                    localStorage.setItem("token",response.data.token);
+                   setToken(response.data.token)
+                   validateToken(response.data.token);
                 }
             }else{
                 swal(response.data.error);
