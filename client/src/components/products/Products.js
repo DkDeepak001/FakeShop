@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import './product.css'
 
 import '../home/Home.css'
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 
 function Products() {
     let { productId } = useParams();
@@ -18,7 +18,12 @@ function Products() {
         setProduct(response.data);
     }
 
+    const addToCart = async (pid) => {
+        const id = pid;
+        const request = axios.get(`http://localhost:5000/addCart/${id}`);
+        console.log(request);
 
+    }
 
     return (
     <div>
@@ -35,7 +40,7 @@ function Products() {
                 </div>
                 <div className='pricing-coloum'>$ {product.price}</div>
                 <div className="solo-product-price">
-                    <a href="#" className="cart-btn">Add to cart</a>
+                    <button onClick={() => addToCart(product.id)} className="cart-btn">Add to cart</button>
                 </div>
             </div>
             </div>

@@ -3,10 +3,22 @@ import './header.css';
 import {Link} from 'react-router-dom'
 
 function Header() {
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("verifiedToken");
+    window.location.href = "/login";
+  }
+
   return (
     <div className='header-container'>
-      <h2>Header</h2>
-      <Link to="/cart"><button>Cart</button></Link>
+       <div className='header-align'>
+          <Link to="/"><h2>FakeShop</h2></Link>
+          <div className='header-left'>
+              <Link to="/cart"><button>Cart</button></Link>
+              <button onClick={logOut}>Logout</button>
+          </div>
+       </div>
     </div>
   )
 }

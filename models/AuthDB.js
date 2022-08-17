@@ -81,11 +81,25 @@ exports.signUp = async (data) =>{
 
 
 exports.validateToken = async (data) => {
-    if(data){
-        const verifyToken = await jwt.verify(data,"kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a");
-        return (verifyToken);
-    }else {
-        return {userName : null}
-    }
+    // if(data){
+    //     const verifyToken = await jwt.verify(data, 'kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a', function(err, decoded) {
+    //         if(err){
+    //             console.log(err);
+    //         }else if(decoded)
+    //         console.log(decoded.userName);
+    //     })
+    // }else {
+    //     return {userName : null}
+    // }
     
+    if(data){
+        try {
+            var decoded = jwt.verify(data, 'kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a');
+            return {userName : decoded.userName , status : "sucess" , message : "token verifed sucessfully"}
+        } catch(err) {
+            return {userName: null , message : "invalid token" ,status : "failed"}
+          }
+    }else{
+        return {userName : null , status :"failed" , message: "Token not found"} 
+    }
 }

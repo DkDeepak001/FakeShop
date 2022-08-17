@@ -51,9 +51,12 @@ app.route("/login")
 app.route("/validateToken")
     .post(async(req,res) => {
         const response = await AuthDB.validateToken(req.body.data)
-        if(response.userName !== null ){
-            res.status(200).json({tokenValidated : true , userName : response.userName});
-        }
+        res.status(200).json(response);
+    })
+
+app.route("/addCart/:id")
+    .get(async(req,res) => {
+        console.log(req.params.id);
     })
 
 app.listen("5000",() => {
