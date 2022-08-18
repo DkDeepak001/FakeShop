@@ -71,7 +71,7 @@
   margin-right: 20px;
 }
 
-.cart-btn {
+.cart-button-product {
   display: inline-block;
   background-color: #7dc855;
   border-radius: 6px;
@@ -80,8 +80,9 @@
   text-decoration: none;
   padding: 12px 30px;
   transition: all 0.5s;
+  border: none;
 }
-.cart-btn:hover {
+.cart-button-product:hover {
   background-color: #64af3d;
 }
 

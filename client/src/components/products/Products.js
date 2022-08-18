@@ -1,28 +1,63 @@
 import React ,{useEffect, useState}from 'react';
-import { useParams } from "react-router-dom";
+import { useParams , useHistory } from "react-router-dom";
 import './product.css'
-
+import swal from 'sweetalert2';
 import '../home/Home.css'
 import axios, { Axios } from 'axios';
 
 function Products() {
-    let { productId } = useParams();
+    const { productId } = useParams();
+    const history = useHistory();
     const [product, setProduct] = useState();
+
+    const [token,setToken] = useState(localStorage.getItem("token"))
+    const [verified ,setVerified] = useState(false);
+   
+    useEffect(()=>{
+      validateToken(token);
+    })
+   
+    const validateToken = async ( rawToken ) => { 
+      const response  = await axios.post("http://localhost:5000/validateToken",{
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json;charset=UTF-8'
+          },
+          data: rawToken
+      });
+    }
+
     useEffect(()=>{
         fetchData();
     },[])
 
     const fetchData = async () => {
         const response = await axios.get(`https://fakestoreapi.com/products/${productId}`).catch((err)=> console.log("err",err));
-        console.log(response.data);
         setProduct(response.data);
     }
 
-    const addToCart = async (pid) => {
-        const id = pid;
-        const request = axios.get(`http://localhost:5000/addCart/${id}`);
-        console.log(request);
+    const addToCart = async (pid,title) => {
+       if(!localStorage.getItem("token")){
+            history.push("/login");
+       }else{
 
+        const id = pid;
+        const request = await axios.post(`http://localhost:5000/addCart`,{
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: {token : localStorage.getItem("token") , itemId : id }
+        });
+        if( request.data.status === 'ok'){
+            swal.fire(
+                ' Added to cart',
+                title +'added to your shopping bag!',
+                'success'
+              )
+        };
+
+       }
     }
 
     return (
@@ -40,7 +75,7 @@ function Products() {
                 </div>
                 <div className='pricing-coloum'>$ {product.price}</div>
                 <div className="solo-product-price">
-                    <button onClick={() => addToCart(product.id)} className="cart-btn">Add to cart</button>
+                    <button onClick={() => addToCart(product.id,product.title)} className="cart-button-product">Add to cart</button>
                 </div>
             </div>
             </div>

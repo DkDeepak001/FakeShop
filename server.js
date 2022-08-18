@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const AuthDB = require("./models/AuthDB");
+const CartDB = require("./models/CartDB");
 
 //initalize express
 const app = express();
@@ -53,10 +54,30 @@ app.route("/validateToken")
         const response = await AuthDB.validateToken(req.body.data)
         res.status(200).json(response);
     })
-
-app.route("/addCart/:id")
-    .get(async(req,res) => {
-        console.log(req.params.id);
+    
+    app.route("/addCart")
+    .post(async(req,res) => {
+        const response = await CartDB.addToCart(req.body.data);
+        console.log(response)
+        res.status(200).json(response);
+    })
+    
+    
+    app.route("/getCart")
+    .post(async(req,res) => {
+        const response = await CartDB.getCart(req.body.data);
+        res.status(200).json(response);
+    })
+    
+    app.route("/updateCartQuantity")
+    .post(async(req,res) => {
+        const response = await CartDB.changeQuantity(req.body.data);
+        res.status(200).json(response);
+    })
+    app.route("/deleteItem")
+    .post(async(req,res) => { 
+        const response = await CartDB.deleteItem(req.body.data);
+        res.status(200).json(response);
     })
 
 app.listen("5000",() => {

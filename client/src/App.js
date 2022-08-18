@@ -7,6 +7,7 @@ import Products from './components/products/Products';
 import Cart from './components/cart/Cart';
 import Login from './components/login/login';
 import signUp from './components/login/signUp';
+import Checkout from './components/checkout/checkout';
 function App() {
   return (
     <div className="App-container">
@@ -22,6 +23,8 @@ function App() {
               <Route exact path="/login" component={Login} >
               </Route>
               <Route exact path="/signup" component={signUp} >
+              </Route>
+              <Route exact path="/checkOut" component={Checkout} >
               </Route>
             </Switch>
       </Router>

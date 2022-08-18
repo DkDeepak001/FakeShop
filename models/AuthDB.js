@@ -1,27 +1,9 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
+const { newUser, newItem } = require('./conn');
 
 
-mongoose.connect('mongodb://localhost:27017/fakeShop')
-    .then(()=>{
-	    console.log('connected');
-	})
-    .catch((e)=>{
-	    console.log("Something went wrong", e);
-	})
-
-//creating new schema for created collection
-const newUserSchema = new mongoose.Schema({
-    userName:String,
-    password:String,
-    email:String,
-    timsStamp:Number
-}) 
-
-//creating new document for storing data
-const newUser = new mongoose.model("User",newUserSchema)
 
 exports.login = async (data) =>{
     try {
