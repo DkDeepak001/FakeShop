@@ -8,6 +8,8 @@ import Cart from './components/cart/Cart';
 import Login from './components/login/login';
 import signUp from './components/login/signUp';
 import Checkout from './components/checkout/checkout';
+import Failed from './components/checkout/failed';
+import Sucess from './components/checkout/sucess';
 function App() {
   return (
     <div className="App-container">
@@ -25,6 +27,10 @@ function App() {
               <Route exact path="/signup" component={signUp} >
               </Route>
               <Route exact path="/checkOut" component={Checkout} >
+              </Route>
+              <Route exact path="/cancel" component={Failed} >
+              </Route>
+              <Route exact path="/success/:id" component={Sucess} >
               </Route>
             </Switch>
       </Router>

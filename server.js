@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const AuthDB = require("./models/AuthDB");
 const CartDB = require("./models/CartDB");
+const Payment = require("./models/payment");
 
 //initalize express
 const app = express();
@@ -79,6 +80,20 @@ app.route("/validateToken")
         const response = await CartDB.deleteItem(req.body.data);
         res.status(200).json(response);
     })
+    
+    app.route("/makePayment")
+    .post(async(req,res)=>{
+        const response = await Payment.check(req.body.data);
+        res.status(200).json(response);
+    })
+
+    app.route("/order/sucess")
+        .post(async (req,res) => {
+            const response = await Payment.checkPayment(req.body.data);
+            // const session = await stripe.checkout.sessions.retrieve(req.body.id);
+
+        })
+    
 
 app.listen("5000",() => {
     console.log("server started at port 5000");

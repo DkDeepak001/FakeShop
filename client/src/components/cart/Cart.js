@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom'
 import axios from 'axios';
 import swal from 'sweetalert';
 import './cart.css';
+import Stripe from 'react-stripe-checkout';
 function Cart() {
   const [token,setToken] = useState(localStorage.getItem("token"));
   const [cartProducts ,setCartProducts] = useState();
@@ -41,9 +42,13 @@ function Cart() {
       });
       const fetchProductData = await axios.get("https://fakestoreapi.com/products");
       const product = fetchProductData.data.filter((data) => {return  response.data.cart.some((x) => {return data.id === parseInt(x.productId)}) });
-      const quantity = response.data.cart.map((x) => x.productCount);
+      const quantity = response.data.cart.map((x) => {return ({id:parseInt(x.productId),quantity:x.productCount})});
+      // console.log(response.data.cart);
+      quantity.sort((a, b) => a.id-b.id)
+      console.log(product);
+      console.log(quantity);
       for(let i = 0 ; i< quantity.length ; i++){
-        product[i].quantity = quantity[i];
+        product[i].quantity = quantity[i].quantity;
       }
       
       setCartProducts(product);
@@ -83,6 +88,24 @@ function Cart() {
       }
     }
 
+    const makePayment = async () =>{
+      const data = {
+        cartProducts,token
+      }
+      const headers = {
+        "content-Type":"application/json"
+      }
+      const response = await axios.post("http://localhost:5000/makePayment",{
+        headers:headers,
+        data:data,
+      });
+      console.log(response.data)
+      if(response.data.session.url){
+        window.location.href = response.data.session.url;
+      }
+    }
+
+
   return (
     <>
       {localStorage.getItem('token') ?
@@ -121,7 +144,9 @@ function Cart() {
       <div className='footer-cart-container'> 
         <div className='footer-cart'>
           <h3>Total : {total} </h3>
-          <Link to="/checkOut" className='cart-button-product'>Checkout</Link>
+         
+            <button  className='cart-button-product' onClick={makePayment}> Checkout</button>
+          {/* <Link to="/checkOut" className='cart-button-product'>Checkout</Link> */}
         </div>
       </div>
 

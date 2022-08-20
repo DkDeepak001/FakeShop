@@ -28,7 +28,23 @@ const newCartItem = new mongoose.Schema({
 
 const newItem = new mongoose.model("cart",newCartItem);
 
+const orderDetailsSchema = new mongoose.Schema({
+    userName:String,
+    email:String,
+    orderNumber:[{
+        session_id:String,
+        amount_total:Number,
+        client_reference_id:String,
+        customer_id_Stripe:String,
+        payment_status:String,
+        Product:[]
+    }]
+})
+
+const newOrder = new mongoose.model("orderPage",orderDetailsSchema);
+
+
 // Exporting our model objects
 module.exports = {
-    newUser, newItem
+    newUser, newItem,newOrder
 }
