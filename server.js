@@ -4,6 +4,8 @@ const cors = require('cors');
 const AuthDB = require("./models/AuthDB");
 const CartDB = require("./models/CartDB");
 const Payment = require("./models/payment");
+const Order = require("./models/OrderPageDB");
+
 
 //initalize express
 const app = express();
@@ -90,9 +92,15 @@ app.route("/validateToken")
     app.route("/order/sucess")
         .post(async (req,res) => {
             const response = await Payment.checkPayment(req.body.data);
-            // const session = await stripe.checkout.sessions.retrieve(req.body.id);
-
+            res.status(200).json(response);
         })
+    
+    app.route("/OrderPage")
+        .post(async (req,res) => {
+            const response = await Order.FetchOrder(req.body.data);
+            res.status(200).json(response);
+    })
+
     
 
 app.listen("5000",() => {

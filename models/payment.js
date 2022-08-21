@@ -44,12 +44,14 @@ try {
 }
 
 exports.checkPayment = async ({id,token})=>{
+   
     const session = await stripe.checkout.sessions.retrieve(id);
     const getListItems = await stripe.checkout.sessions.listLineItems(session.id);
-    
+
     const ifUserHadOrder = await newOrder.findOne({userName:session.customer_details.name})
    if(ifUserHadOrder){
-    console.log(ifUserHadOrder);
+    const ifSessionId = await newOrder.findOne({userName:session.customer_details.name,"orderNumber.session_id": session.id });
+    if(ifSessionId === null){
         if(session.status === 'complete'){
             const updateCart = await newOrder.findOneAndUpdate(
                 {userName : session.customer_details.name},
@@ -65,10 +67,16 @@ exports.checkPayment = async ({id,token})=>{
                     }
                 }
             )
-                console.log("pushed");
+            const empty = await newItem.findOneAndRemove({userName:session.customer_details.name});
+            return{status:"ok",message:"order placed sucesfully"};
         }else{
-            console.log("payment not completed");
+            return{status:"error",message:"payment not completed"};
         }
+    }
+    else{
+        return{status:"error",message:"order already exceucted"};
+    }
+    
    }else{
     const addNewOrder = new newOrder({
         userName:session.customer_details.name,
@@ -83,7 +91,10 @@ exports.checkPayment = async ({id,token})=>{
         }]
     })
     const result = await addNewOrder.save();   
-}
+    const empty = await newItem.findOneAndRemove({userName:session.customer_details.name});
+    return{status:"ok",message:"order placed sucesfully"};}
+
+
 
 
 

@@ -7,9 +7,9 @@ import Products from './components/products/Products';
 import Cart from './components/cart/Cart';
 import Login from './components/login/login';
 import signUp from './components/login/signUp';
-import Checkout from './components/checkout/checkout';
-import Failed from './components/checkout/failed';
-import Sucess from './components/checkout/sucess';
+import OrderPage from './components/OrderPage/OrderPage';
+import Failed from './components/OrderPage/failed';
+import Sucess from './components/OrderPage/sucess';
 function App() {
   return (
     <div className="App-container">
@@ -26,7 +26,7 @@ function App() {
               </Route>
               <Route exact path="/signup" component={signUp} >
               </Route>
-              <Route exact path="/checkOut" component={Checkout} >
+              <Route exact path="/OrderPage" component={OrderPage} >
               </Route>
               <Route exact path="/cancel" component={Failed} >
               </Route>

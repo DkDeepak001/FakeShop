@@ -40,21 +40,25 @@ function Cart() {
           },
           data: token
       });
-      const fetchProductData = await axios.get("https://fakestoreapi.com/products");
-      const product = fetchProductData.data.filter((data) => {return  response.data.cart.some((x) => {return data.id === parseInt(x.productId)}) });
-      const quantity = response.data.cart.map((x) => {return ({id:parseInt(x.productId),quantity:x.productCount})});
-      // console.log(response.data.cart);
-      quantity.sort((a, b) => a.id-b.id)
-      console.log(product);
-      console.log(quantity);
-      for(let i = 0 ; i< quantity.length ; i++){
-        product[i].quantity = quantity[i].quantity;
+      if(response.data !== ""){
+        const fetchProductData = await axios.get("https://fakestoreapi.com/products");
+        const product = fetchProductData.data.filter((data) => {return  response.data.cart.some((x) => {return data.id === parseInt(x.productId)}) });
+        const quantity = response.data.cart.map((x) => {return ({id:parseInt(x.productId),quantity:x.productCount})});
+        quantity.sort((a, b) => a.id-b.id)
+
+        for(let i = 0 ; i< quantity.length ; i++){
+            product[i].quantity = quantity[i].quantity;
+          }
+        
+        setCartProducts(product);
+        const arrOfPrice = (product.map(x=> (x.quantity*x.price)))
+        const total = arrOfPrice.reduce((a, b) => (parseFloat(a) + parseFloat(b)).toFixed(2), 0)
+        setTotal(total);
+      }else{
+        setCartProducts();
       }
       
-      setCartProducts(product);
-      const arrOfPrice = (product.map(x=> (x.quantity*x.price)))
-      const total = arrOfPrice.reduce((a, b) => (parseFloat(a) + parseFloat(b)).toFixed(2), 0)
-      setTotal(total);
+  
     }
 
     const [change ,setChange] = useState(0)
@@ -141,7 +145,7 @@ function Cart() {
      
     :"No  Items in you cart"
   }
-      <div className='footer-cart-container'> 
+   {cartProducts?   <div className='footer-cart-container'> 
         <div className='footer-cart'>
           <h3>Total : {total} </h3>
          
@@ -149,7 +153,7 @@ function Cart() {
           {/* <Link to="/checkOut" className='cart-button-product'>Checkout</Link> */}
         </div>
       </div>
-
+:""}
       </div>
   </div>
       :

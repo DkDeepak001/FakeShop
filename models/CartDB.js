@@ -50,7 +50,15 @@ exports.getCart = async( data ) => {
     const decode = jwt.verify(data, 'kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a');
     
     const getItems = await newItem.findOne({userName : decode.userName})
-    return {cart : getItems.cartItem , status : "ok", message : getItems.cartItem.length + " items found" };
+    if(getItems){
+        if(getItems.cartItem.length == 0){
+            const removeEmpty = await newItem.findOneAndRemove({userName : decode.userName});
+        }else{
+            return {cart : getItems.cartItem , status : "ok", message : getItems.cartItem.length + " items found" };
+        }
+    }
+    
+
 }
 
 exports.changeQuantity = async ({type , token ,productId , quantity}) => {
