@@ -15,8 +15,8 @@ function Header() {
        <div className='header-align'>
           <Link to="/"><h2>FakeShop</h2></Link>
           <div className='header-left'>
-              <Link to="/cart"><button>Cart</button></Link>
-              <button onClick={logOut}>Logout</button>
+              <Link to="/cart"><button className='button-59'>Cart</button></Link>
+              <button className='button-59' onClick={logOut}>Logout</button>
           </div>
        </div>
     </div>

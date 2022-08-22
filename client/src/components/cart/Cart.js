@@ -143,7 +143,7 @@ function Cart() {
      </div>
       )  
      
-    :"No  Items in you cart"
+    :<><h4>No  Items in you cart</h4><Link to="/OrderPage"><button className='button-9'>Order page</button></Link></>
   }
    {cartProducts?   <div className='footer-cart-container'> 
         <div className='footer-cart'>

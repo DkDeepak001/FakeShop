@@ -47,6 +47,7 @@ exports.addToCart = async(data) => {
 } 
 
 exports.getCart = async( data ) => {
+   try {
     const decode = jwt.verify(data, 'kndJI8*6^46A/GS*D&576(*^YA+--&26214-+hj0a9sd+-+8a');
     
     const getItems = await newItem.findOne({userName : decode.userName})
@@ -57,6 +58,10 @@ exports.getCart = async( data ) => {
             return {cart : getItems.cartItem , status : "ok", message : getItems.cartItem.length + " items found" };
         }
     }
+
+   } catch (error) {
+    console.log(error)
+   }
     
 
 }
