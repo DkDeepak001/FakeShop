@@ -5,6 +5,7 @@ const AuthDB = require("./models/AuthDB");
 const CartDB = require("./models/CartDB");
 const Payment = require("./models/payment");
 const Order = require("./models/OrderPageDB");
+require("dotenv").config();
 
 
 //initalize express
@@ -103,6 +104,6 @@ app.route("/validateToken")
 
     
 
-app.listen("5000",() => {
+app.listen(process.env.PORT || 5000,() => {
     console.log("server started at port 5000");
 })
