@@ -14,7 +14,7 @@ function Cart() {
 
   const validateToken = async (rawToken) => {
     const response = await axios.post(
-      "http://fakeshop.dkdeepak.com/validateToken",
+      "https://fakeshop-ecommerce.herokuapp.com/validateToken",
       {
         headers: {
           Accept: "application/json",
@@ -34,7 +34,7 @@ function Cart() {
   }, []);
 
   const fetchCartData = async () => {
-    const response = await axios.post("http://fakeshop.dkdeepak.com/getCart", {
+    const response = await axios.post("https://fakeshop-ecommerce.herokuapp.com/getCart", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
@@ -74,7 +74,7 @@ function Cart() {
   const [change, setChange] = useState(0);
   const changeQuantity = async (e, pid, quantity) => {
     const req = await axios.post(
-      "http://fakeshop.dkdeepak.com/updateCartQuantity",
+      "https://fakeshop-ecommerce.herokuapp.com/updateCartQuantity",
       {
         headers: {
           Accept: "application/json",
@@ -98,7 +98,7 @@ function Cart() {
 
   const removeitem = async (id) => {
     const response = await axios.post(
-      "http://fakeshop.dkdeepak.com/deleteItem",
+      "https://fakeshop-ecommerce.herokuapp.com/deleteItem",
       {
         headers: {
           Accept: "application/json",
@@ -121,7 +121,7 @@ function Cart() {
       "content-Type": "application/json",
     };
     const response = await axios.post(
-      "http://fakeshop.dkdeepak.com/makePayment",
+      "https://fakeshop-ecommerce.herokuapp.com/makePayment",
       {
         headers: headers,
         data: data,

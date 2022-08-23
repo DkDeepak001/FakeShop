@@ -29,7 +29,7 @@ function Login() {
 
   const validateToken = async (rawToken) => {
     const response = await axios.post(
-      "http://fakeshop.dkdeepak.com/validateToken",
+      "https://fakeshop-ecommerce.herokuapp.com/validateToken",
       {
         headers: {
           Accept: "application/json",
@@ -47,7 +47,7 @@ function Login() {
   const formData = async (data) => {
     const bodyData = data;
     if (data.userName !== "" && data.password !== "") {
-      const response = await axios.post("http://fakeshop.dkdeepak.com/login", {
+      const response = await axios.post("https://fakeshop-ecommerce.herokuapp.com/login", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",

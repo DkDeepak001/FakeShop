@@ -20,7 +20,7 @@ const Sucess = () => {
       "content-Type": "application/json",
     };
     const response = await axios.post(
-      "http://fakeshop.dkdeepak.com/order/sucess",
+      "https://fakeshop-ecommerce.herokuapp.com/order/sucess",
       { header: headers, data: data }
     );
     if (response.data.status === "ok") {

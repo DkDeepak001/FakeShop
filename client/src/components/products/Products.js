@@ -17,7 +17,7 @@ function Products() {
 
   const validateToken = async (rawToken) => {
     await axios.post(
-      "http://fakeshop.dkdeepak.com/validateToken",
+      "https://fakeshop-ecommerce.herokuapp.com/validateToken",
       {
         headers: {
           Accept: "application/json",
@@ -44,7 +44,7 @@ function Products() {
       history.push("/login");
     } else {
       const id = pid;
-      const request = await axios.post(`http://fakeshop.dkdeepak.com/addCart`, {
+      const request = await axios.post(`https://fakeshop-ecommerce.herokuapp.com/addCart`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",

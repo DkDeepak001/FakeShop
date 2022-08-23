@@ -30,7 +30,7 @@ function Login() {
       formDetails.password !== "" &&
       formDetails.email !== ""
     ) {
-      const response = await axios.post("http://fakeshop.dkdeepak.com/signUp", {
+      const response = await axios.post("https://fakeshop-ecommerce.herokuapp.com/signUp", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",

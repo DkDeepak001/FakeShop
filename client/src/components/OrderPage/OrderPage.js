@@ -11,7 +11,7 @@ function OrderPage() {
 
   const fetchOrder = async () => {
     const response = await axios.post(
-      "http://fakeshop.dkdeepak.com/OrderPage",
+      "https://fakeshop-ecommerce.herokuapp.com/OrderPage",
       {
         headers: {
           Accept: "application/json",
