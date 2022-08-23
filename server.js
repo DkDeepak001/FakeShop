@@ -6,6 +6,7 @@ const CartDB = require("./models/CartDB");
 const Payment = require("./models/payment");
 const Order = require("./models/OrderPageDB");
 require("dotenv").config();
+const path = require('path');
 
 
 //initalize express
@@ -17,16 +18,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
 
+app.use(express.static(path.join(__dirname,'/client/build')))
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'client','build','index.html'))
+})
 
-app.route("/")
-    .get(async(req,res) =>{
-        res.send("home route");
-    })
-app.route("/read")
-    .get(async(req,res) =>{
-        const response = await AuthDB.fetchUser();
-        res.send(response)
-    })
+// app.route("/")
+//     .get(async(req,res) =>{
+//         res.send("home route");
+//     })
+// app.route("/read")
+//     .get(async(req,res) =>{
+//         const response = await AuthDB.fetchUser();
+//         res.send(response)
+//     })
 
 
 
