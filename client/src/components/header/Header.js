@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './header.css';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import gsap from 'gsap';
 
 function Header() {
+
 
   const logOut = () => {
     localStorage.removeItem("token");
@@ -12,7 +14,7 @@ function Header() {
 
   return (
     <div className='header-container'>
-       <div className='header-align'>
+       <div className='header-align' >
           <Link to="/"><h2>FakeShop</h2></Link>
           <div className='header-left'>
               <Link to="/cart"><button className='button-59'>Cart</button></Link>

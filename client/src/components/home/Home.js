@@ -3,29 +3,31 @@ import React, { useEffect, useLayoutEffect }  from 'react';
 import {useSelector ,useDispatch} from 'react-redux';
 import {fetchProducts} from '../../feauters/reducer';
 import {Link} from 'react-router-dom'
-
+import gsap from 'gsap';
 import './Home.css';
 
 function Home() {
   
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const products = useSelector((state)=> state.data.value);
   console.log(products);
 
   useLayoutEffect(()=>{
     fetchData();
   },[])
+  
 
+  
   const fetchData = async () => {
-      const response = await axios.get('https://fakestoreapi.com/products').catch((err) => console.log('err',err))
-      console.log(response.data);
-      dispatch(fetchProducts(response.data));
+    const response = await axios.get('https://fakestoreapi.com/products').catch((err) => console.log('err',err))
+    console.log(response.data);
+    dispatch(fetchProducts(response.data));
 
   }
   
   return (
-    <div className='home-container'>
-      <div className='home-grid'>
+    <div className='home-container' >
+      <div className='home-grid' >
       {products.map((p,index) =>  
             <div class="product-card" key={index}>
               <Link to={`/products/${p.id}`}>

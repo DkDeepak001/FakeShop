@@ -4,6 +4,7 @@ import './product.css'
 import swal from 'sweetalert2';
 import '../home/Home.css'
 import axios, { Axios } from 'axios';
+import gsap from 'gsap';
 
 function Products() {
     const { productId } = useParams();
@@ -29,7 +30,9 @@ function Products() {
 
     useEffect(()=>{
         fetchData();
+        
     },[])
+
 
     const fetchData = async () => {
         const response = await axios.get(`https://fakestoreapi.com/products/${productId}`).catch((err)=> console.log("err",err));
@@ -63,7 +66,7 @@ function Products() {
     return (
     <div>
         {product ?
-            <div className="container"> 
+            <div className="container" > 
             <div className="left-column">
                 <img data-image="black" src={product.image} alt={product.title} />
             </div>
