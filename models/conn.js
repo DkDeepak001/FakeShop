@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://Deepak:<password>@cluster0.1twbjjk.mongodb.net/fakeShop?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://Deepak:<password>@cluster0.1twbjjk.mongodb.net/?retryWrites=true&w=majority')
     .then(()=>{
 	    console.log('connected');
 	})
