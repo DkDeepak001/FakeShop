@@ -32,8 +32,8 @@ try {
         currency:'usd',
         client_reference_id:uid,
         payment_method_types: ["card"],
-        success_url: 'http://localhost:3000/success/{CHECKOUT_SESSION_ID}',
-        cancel_url: 'http://localhost:3000/cancel',
+        success_url: 'https://fakeshop-ecommerce.herokuapp.com/success/{CHECKOUT_SESSION_ID}',
+        cancel_url: 'https://fakeshop-ecommerce.herokuapp.com/cancel',
       })
 
       return {customer : customer ,session :session};
