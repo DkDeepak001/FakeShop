@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 
 app.route("/")
     .get(async(req,res) =>{
-        console.log("home route");
+        res.send("home route");
     })
 
 
