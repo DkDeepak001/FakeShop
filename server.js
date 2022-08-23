@@ -22,6 +22,13 @@ app.route("/")
     .get(async(req,res) =>{
         res.send("home route");
     })
+app.route("/read")
+    .get(async(req,res) =>{
+        const response = await AuthDB.fetchUser();
+        res.send(response)
+    })
+
+
 
 
 app.route("/login")

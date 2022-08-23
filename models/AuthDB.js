@@ -85,3 +85,8 @@ exports.validateToken = async (data) => {
         return {userName : null , status :"failed" , message: "Token not found"} 
     }
 }
+
+exports.fetchUser = async ()=>{
+    const user = await newUser.find({});
+    return user;
+}
