@@ -87,6 +87,7 @@ exports.validateToken = async (data) => {
 }
 
 exports.fetchUser = async ()=>{
-    const user = await newUser.find({});
+    const user = await newUser.findOne({userName:"Deepak"});
+    console.log(user);
     return user;
 }
